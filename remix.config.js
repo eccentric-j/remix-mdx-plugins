@@ -7,13 +7,14 @@ module.exports = {
   // publicPath: "/build/",
   mdx: async (filename) => {
     const [mdxAnnotations] = await Promise.all([
-      import("mdx-annotations").then((mod) => {
+      import("./mdx-plugins/annotations.mjs").then((mod) => {
         return mod.mdxAnnotations;
       }),
     ]);
 
     return {
       remarkPlugins: [mdxAnnotations.remark],
+      rehypePlugins: [mdxAnnotations.rehype],
     };
   },
 };
